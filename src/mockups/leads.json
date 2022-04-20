@@ -1,0 +1,25 @@
+{  
+  "data": [
+    {
+      "name": "Conversões",
+      "value": "2500000",
+      "icon": "mail",
+      "color": "blue",
+      "legend": "Conversão é a ação do envio de qualquer formulário."
+    },
+    {
+      "name": "Leads",
+      "value": "965321",
+      "icon": "person",
+      "color": "purple",
+      "legend": "Lead é um contato individual do cliente ao enviar formulários."
+    },
+    {
+      "name": "Custo por lead",
+      "value": "10",
+      "icon": "currency",
+      "color": "green",
+      "legend": "É o cálculo do investimento utilizado pela quantidade de leads gerados no período."
+    }
+  ]
+}
