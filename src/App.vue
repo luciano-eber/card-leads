@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, onBeforeUpdate } from 'vue'
 import mockupLeads from '@/mockups/leads'
 import ConectaOverviewCard from '@/components/ConectaOverviewCard'
 import ConectaTooltip from '@/components/ConectaTooltip'
@@ -7,16 +7,35 @@ import ConectaCard from '@/components/ConectaCard'
 
 const data = ref(mockupLeads.data)
 
+const cards = reactive({
+  tooltips: [],
+  tooltipMouseEnter: function(id) {
+    cards.tooltips[id].show()
+  },
+  tooltipMouseLeave: function(id) {
+    cards.tooltips[id].hide()
+  }
+})
+
+onBeforeUpdate(() => {
+  cards.value = {}
+})
+
 </script>
 
 <template>
   <div class="cards-wrap">
     <ConectaOverviewCard v-for="(d,i) in data" :key="i" :data="d">
       <template #tooltip>
-        <ConectaTooltip :content="d.legend" />
+        <ConectaTooltip :content="d.legend" :ref="el => { cards.tooltips[i] = el }"/>
       </template>
       <template #card>
-        <ConectaCard :data="d" />
+        <ConectaCard 
+          :id="i" 
+          :data="d" 
+          @infoMouseEnter="cards.tooltipMouseEnter"
+          @infoMouseLeave="cards.tooltipMouseLeave"
+        />
       </template>
     </ConectaOverviewCard>
   </div>

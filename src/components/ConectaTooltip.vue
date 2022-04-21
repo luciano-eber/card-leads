@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 
 const props = defineProps({
   content: String,
@@ -6,22 +7,38 @@ const props = defineProps({
   bgColor: String,
 })
 
+const isShow = ref(false)
+
+function show() {
+  isShow.value = true
+}
+
+function hide() {
+  isShow.value = false
+}
+
+defineExpose({
+  show,
+  hide
+})
+
 </script>
 
 <template>
-  <div class="tooltip" >
+  <Transition name="fade" mode="out-in">
+    <div class="tooltip" v-show="isShow">
 
-    <div class="bubble" :style="{ 'background-color': bgColor, 'color': color }">
-      <p class="hint">{{ content }}</p>
-    </div>
+      <div class="bubble" :style="{ 'background-color': bgColor, 'color': color }">
+        <p class="hint">{{ content }}</p>
+      </div>
 
-    <div class="arrow">
-      <svg width="27" height="9" viewBox="0 0 27 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15.3334 7.54549C14.3343 8.20094 13.0414 8.20093 12.0423 7.54548L0.540396 4.38021e-05L26.8353 4.57764e-05L15.3334 7.54549Z" :fill="bgColor" :class="{ 'color-arrow': !bgColor }"/>
-      </svg>
+      <div class="arrow">
+        <svg width="27" height="9" viewBox="0 0 27 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.3334 7.54549C14.3343 8.20094 13.0414 8.20093 12.0423 7.54548L0.540396 4.38021e-05L26.8353 4.57764e-05L15.3334 7.54549Z" :fill="bgColor" :class="{ 'color-arrow': !bgColor }"/>
+        </svg>
+      </div>
     </div>
-  </div>
-  
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
@@ -65,6 +82,16 @@ const props = defineProps({
 
 .color-arrow {
   fill: $color-darken-2;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>

@@ -3,22 +3,41 @@ import { computed } from 'vue'
 import ConectaIcon from '@/components/ConectaIcon'
 
 const props = defineProps({
-  data: Object,
+  data: {
+    type: Object,
+    default() {
+      return {}
+    }
+  },
+  id: Number,
 })
 
 const iconColorClass = computed(() => `icon-${props.data.color}`)
 const iconClass = computed(() => `icon-${props.data.icon}`)
 
+const emit = defineEmits([
+  'info-mouse-leave',
+  'info-mouse-enter'
+])
+
+function infoMouseLeave() {
+  emit('info-mouse-leave', props.id)
+}
+
+function infoMouseEnter() {
+  emit('info-mouse-enter', props.id)
+}
+
 </script>
 
 <template>
   <div class="conecta-card">
-    <div class="card-sup-icon">
-      <ConectaIcon id="info"/>
+    <div class="card-sup-icon" @mouseenter="infoMouseEnter" @mouseleave="infoMouseLeave">
+      <ConectaIcon id="info" />
     </div>
     <div class="card-wrap">
       <div class="icon-circle" :class="[ iconColorClass, iconClass ]">
-        <ConectaIcon :id="data.icon" class="icon"/>
+        <ConectaIcon :id="data.icon" class="icon" />
       </div>
       <div class="content">
         <h2 class="value">{{ data.value }}</h2>
