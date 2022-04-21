@@ -7,7 +7,7 @@ test('without props', () => {
   expect(wrapper.find('.conecta-card').exists()).toBe(true)
 })
 
-test('with props', () => {
+test('with some props', () => {
   const data = {
     name: 'card display name'
   }

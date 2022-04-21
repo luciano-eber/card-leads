@@ -66,7 +66,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  min-height: calc(100vh - 20px);
+  min-height: calc(100vh - 63px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,6 +78,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 </style>

@@ -21,5 +21,5 @@ test('with not found icon', () => {
     }
   })
 
-  expect(wrapper.find({ref: 'current'}).exists()).toBeFalsy()
+  expect(wrapper.find({ref: 'current'}).exists()).toBeTruthy()
 })

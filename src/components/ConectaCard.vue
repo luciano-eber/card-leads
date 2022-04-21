@@ -1,19 +1,35 @@
 <script setup>
 import { computed } from 'vue'
 import ConectaIcon from '@/components/ConectaIcon'
+import { diffNumberForHumans } from '@/helpers/string'
 
 const props = defineProps({
+  id: {
+    type: Number,
+    default: 1
+  },
   data: {
     type: Object,
     default() {
       return {}
     }
-  },
-  id: Number,
+  }
 })
 
 const iconColorClass = computed(() => `icon-${props.data.color}`)
 const iconClass = computed(() => `icon-${props.data.icon}`)
+
+const displayValue = computed(() => {
+  let value = props.data.value
+
+  if(!value)
+    return ''
+
+  if(!value.includes('R$') || !value.includes('$'))
+    return diffNumberForHumans(value)
+
+  return value
+})
 
 const emit = defineEmits([
   'info-mouse-leave',
@@ -40,7 +56,7 @@ function infoMouseEnter() {
         <ConectaIcon :id="data.icon" class="icon" />
       </div>
       <div class="content">
-        <h2 class="value">{{ data.value }}</h2>
+        <h2 class="value">{{ displayValue }}</h2>
         <h3 class="label">{{ data.name }}</h3>
       </div>
     </div>
@@ -115,28 +131,13 @@ function infoMouseEnter() {
   }
 }
 
-.icon-blue {
-  background-color: rgba($color-blue, 0.3);
-}
-.icon-purple {
-  background-color: rgba($color-purple, 0.3);
-}
-.icon-green {
-  background-color: rgba($color-green, 0.3);
-}
-
-.icon-blue {
-  svg {
-    path {
-      fill: $color-blue;
-    }
-  }
-}
-
-.icon-purple.icon-person {
-  svg {
-    path {
-      fill: $color-purple;
+@each $name, $color in $colors {
+  .icon-#{$name} {
+    background-color: rgba($color, 0.3);
+    svg {
+      path {
+        fill: $color;
+      }
     }
   }
 }
@@ -145,7 +146,9 @@ function infoMouseEnter() {
   svg {
     path {
       stroke: $color-green;
+      fill: none;
     }
   }
 }
+
 </style>

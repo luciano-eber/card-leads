@@ -7,8 +7,8 @@ const props = defineProps({
 })
 
 const currentIcon = computed(() => {
-  if(!props.id || !iconsLib.includes(props.id)) 
-    return null
+  if(!props.id || !iconsLib.includes(props.id))
+    return defineAsyncComponent(() => import('./ConectaIcon/info.vue'))
 
   return defineAsyncComponent(() => import(`./ConectaIcon/${props.id}.vue`))
 })

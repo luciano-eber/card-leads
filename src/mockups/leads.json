@@ -16,7 +16,7 @@
     },
     {
       "name": "Custo por lead",
-      "value": "10",
+      "value": "R$ 10",
       "icon": "currency",
       "color": "green",
       "legend": "É o cálculo do investimento utilizado pela quantidade de leads gerados no período."

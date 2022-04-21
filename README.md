@@ -1,5 +1,11 @@
 # card-leads
 
+Component from figma prototype for dashboard cards
+
+## Stack
+- Vue3 (Composition Api SFC)
+- Scss
+
 ## Project setup
 ```
 yarn install
