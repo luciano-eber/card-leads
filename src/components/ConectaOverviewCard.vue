@@ -16,7 +16,6 @@
 
 .card-overview {
   margin: 0px 15px;
-  border: 1px solid red;
   width: 269px;
   height: 200px;
   position: relative;

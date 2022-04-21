@@ -4,7 +4,6 @@ import mockupLeads from '@/mockups/leads'
 import ConectaOverviewCard from '@/components/ConectaOverviewCard'
 import ConectaTooltip from '@/components/ConectaTooltip'
 import ConectaCard from '@/components/ConectaCard'
-import ConectaIcon from '@/components/ConectaIcon.vue'
 
 const data = ref(mockupLeads.data)
 
@@ -13,20 +12,12 @@ const data = ref(mockupLeads.data)
 <template>
   <div class="cards-wrap">
     <ConectaOverviewCard v-for="(d,i) in data" :key="i" :data="d">
-      
       <template #tooltip>
         <ConectaTooltip :content="d.legend" />
       </template>
-
       <template #card>
-        <ConectaCard :data="d">
-          <template #sup-icon>
-            <ConectaIcon id="info" class="sup-icon"/>
-          </template>
-        </ConectaCard>
-
+        <ConectaCard :data="d" />
       </template>
-
     </ConectaOverviewCard>
   </div>
 </template>
@@ -52,6 +43,7 @@ body {
 #app {
   font-family: 'DM Sans', sans-serif;
   font-style: normal;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -68,14 +60,5 @@ body {
   flex-flow: row wrap;
   justify-content: center;
   position: relative;
-}
-
-/* is possible override default icons styles from parent css*/
-.sup-icon {
-  svg {
-    path {
-      fill: $color-darken-2;
-    }
-  }
 }
 </style>
